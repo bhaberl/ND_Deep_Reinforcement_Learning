@@ -13,7 +13,11 @@ class QNetwork(nn.Module):
             action_size (int): Dimension of each action
             seed (int): Random seed
         """
-        
+        super(QNetwork, self).__init__()
+        self.seed = torch.manual_seed(seed)
+        self.fc1 = nn.Linear(state_size, fc1_units)
+        self.fc2 = nn.Linear(fc1_units, fc2_units)
+        self.fc3 = nn.Linear(fc2_units, action_size)
 
     def forward(self, state):
         """Build a network that maps state -> action values."""
